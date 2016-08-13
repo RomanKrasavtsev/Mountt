@@ -18,3 +18,54 @@
 body {
   margin: 15px;
 }
+
+.navbar-blue {
+  background-color: #337ab7;
+  border-color: #337ab7;
+}
+
+.navbar-blue a {
+  color: #fff;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+  text-decoration: none;
+  background-color: white;
+  color: black;
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+  background-color: white;
+}
+
+.panel-blue {
+  background-color: #337ab7;
+  border-color: #337ab7;
+}
+
+.panel-blue ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: -10px;
+}
+
+.panel-blue ul li {
+  padding-bottom: 10px;
+}
+
+.panel-blue ul a {
+  text-decoration: none;
+}
+
+.panel-blue a {
+  color: white;
+}
+
+ // *** records ***
+.col-md-10 {
+  padding-right: 0px;
+}
+
+.form-inline .btn {
+  margin-left: 12px;
+}
