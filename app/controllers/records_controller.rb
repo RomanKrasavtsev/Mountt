@@ -1,7 +1,7 @@
 class RecordsController < ApplicationController
   def index
     @family = Family.find(1)
-    @user = @family.user.find(1)
+    @current_user = @family.user.find(1)
     @records = @family.record.all.order(:date)
   end
 
@@ -21,6 +21,8 @@ class RecordsController < ApplicationController
 
     redirect_to records_path
   end
+
+  private
 
   def record_params
     params.require(:record).permit(:date, :description, :item_id, :value, :user_id)

@@ -1,0 +1,51 @@
+<div class="panel panel-blue">
+  <div class="panel-body">
+    <%= form_for :item, html: {class: "form-inline"} do |f| %>
+      <div class="form-group">
+        <%= f.text_field :name, type: "text", class: "form-control", placeholder: "Наименование" %>
+      </div>
+      <div class="form-group">
+        <%= f.hidden_field :family_id, value: @current_user.family.id %>
+      </div>
+      <%= f.submit "Добавить", class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">Категории</div>
+  <div class="panel-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Наименование</th>
+          <th>Действия</th>
+        </tr>
+      </thead>
+
+      <% if @items.present? %>
+        <% @items.each_with_index do |item, index| %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= item.name %></td>
+            <td>
+              <a id="edit" class="btn btn-warning">Редактировать</a>
+              <%= link_to "Удалить",
+                item_path(item),
+                method: :delete,
+                data: { confirm: "Вы уверены, что хотите удалить данную запись?" },
+                class: "btn btn-danger"
+              %>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td>Нет записей</td>
+        </tr>
+      <% end %>
+
+    </table>
+  </div>
+</div>

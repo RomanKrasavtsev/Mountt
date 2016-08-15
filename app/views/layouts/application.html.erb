@@ -26,7 +26,7 @@
             <li><a href="#">Помощь</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                  <%= @user.firstname %>
+                  <%= @current_user.firstname %>
                  <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
@@ -51,7 +51,9 @@
               <%= link_to "Учет", records_path %>
             </li>
             <li><a href="">План</a></li>
-            <li><a href="">Категории</a></li>
+            <li>
+              <%= link_to "Категории", items_path %>
+            </li>
             <li><a href="#">Моя семья</a></li>
           </ul>
         </div>
