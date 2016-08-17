@@ -3,4 +3,6 @@ class Item < ApplicationRecord
   has_many :record
 
   default_scope { order :name }
+
+  validates :name, presence: true
 end

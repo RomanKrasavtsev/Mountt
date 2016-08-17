@@ -3,4 +3,6 @@ class User < ApplicationRecord
   has_many :record
 
   default_scope { order :firstname }
+
+  validates :firstname, presence: true
 end
