@@ -2,7 +2,7 @@ class RecordsController < ApplicationController
   def index
     @family = Family.find(1)
     @current_user = @family.user.find(1)
-    @records = @family.record.all.order(:date)
+    @records = @family.record.all
   end
 
   def create

@@ -8,13 +8,13 @@
         <%= f.text_field :description, type: "text", class: "form-control", placeholder: "Описание" %>
       </div>
       <div class="form-group">
-        <%= f.select :item_id, @family.item.order(:name).map { |item| [item.name, item.id] }, {}, { class: "form-control", placeholder: "Категория" } %>
+        <%= f.select :item_id, @family.item.map { |item| [item.name, item.id] }, {}, { class: "form-control", placeholder: "Категория" } %>
       </div>
       <div class="form-group">
         <%= f.text_field :value, type: "number", class: "form-control", placeholder: "Значение" %>
       </div>
       <div class="form-group">
-        <%= f.select :user_id, @family.user.order(:firstname).map { |user| [user.firstname, user.id] }, {}, { class: "form-control", placeholder: "Член семьи" } %>
+        <%= f.select :user_id, @family.user.map { |user| [user.firstname, user.id] }, {}, { class: "form-control", placeholder: "Член семьи" } %>
       </div>
       <%= f.submit "Добавить", class: "btn btn-success" %>
     <% end %>

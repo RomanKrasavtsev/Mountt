@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   def index
     @family = Family.find(1)
     @current_user = @family.user.find(1)
-    @items = @family.item.all.order(:name)
+    @items = @family.item.all
   end
 
   def create
