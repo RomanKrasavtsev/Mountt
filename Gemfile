@@ -32,6 +32,7 @@ gem 'jbuilder', '~> 2.5'
 
 
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'devise'
 
 
 group :development, :test do
