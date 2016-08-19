@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
     @family = Family.find(1)
     @current_user = @family.user.find(1)
