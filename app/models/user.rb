@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable
 
-  has_one :family
+  belongs_to :family
   has_many :record
 
   default_scope { order :firstname }

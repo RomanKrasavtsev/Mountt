@@ -1,14 +1,12 @@
 class RecordsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
-    @family = Family.find(1)
-    @current_user = @family.user.find(1)
-    @records = @family.record.all
+    @records = current_user.family.record.all
   end
 
   def create
-    @record = Record.new(record_params)
+    @record = current_user.family.record.new(record_params)
 
     if @record.save
       redirect_to records_path
@@ -18,7 +16,7 @@ class RecordsController < ApplicationController
   end
 
   def destroy
-    @record = Record.find(params[:id])
+    @record = current_user.family.record.find(params[:id])
     @record.destroy
 
     redirect_to records_path
