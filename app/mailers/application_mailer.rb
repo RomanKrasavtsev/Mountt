@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'noreply@familybudget.com'
+  default from: ENV['EMAIL_MOUNTT']
   layout 'mailer'
 end
