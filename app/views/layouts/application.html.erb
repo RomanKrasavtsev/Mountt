@@ -30,15 +30,17 @@
                     <%= current_user.firstname %>
                    <span class="caret"></span>
                 </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Настройки</a></li>
+                  <li><a href="#">Платежи</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li>
+                    <%= link_to "Выход", destroy_user_session_path, :method => :delete %>
+                  </li>
+                </ul>
               <% else %>
-                <%= link_to "Login" %>
+                <%= link_to "Войти", new_user_session_path %>
               <% end %>
-              <ul class="dropdown-menu">
-                <li><a href="#">Настройки</a></li>
-                <li><a href="#">Платежи</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Выход</a></li>
-              </ul>
             </li>
           </ul>
         </div><!-- /.navbar-collapse -->
@@ -64,12 +66,18 @@
       </div>
 
       <div class="col-md-10">
-        <div class="notice">
-          <%= notice %>
-        </div>
-        <div class="alert">
-          <%= alert %>
-        </div>
+        <% if flash[:notice] %>
+          <div class="notice">
+            <%= notice %>
+            <%= flash[:notice] %>
+          </div>
+        <% end %>
+        <% if flash[:alert] %>
+          <div class="alert">
+            <%= alert %>
+            <%= flash[:alert] %>
+          </div>
+        <% end %>
         <%= yield %>
       </div>
     </row>
