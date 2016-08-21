@@ -66,18 +66,17 @@
       </div>
 
       <div class="col-md-10">
-        <% if flash[:notice] %>
+        <% if notice %>
           <div class="notice">
             <%= notice %>
-            <%= flash[:notice] %>
           </div>
         <% end %>
-        <% if flash[:alert] %>
+        <% if alert %>
           <div class="alert">
             <%= alert %>
-            <%= flash[:alert] %>
           </div>
         <% end %>
+
         <%= yield %>
       </div>
     </row>

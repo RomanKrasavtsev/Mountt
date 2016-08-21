@@ -1,3 +1,17 @@
+<% if defined? @record and @record.errors.any? %>
+  <div class="error">
+    <h2>
+      <%= pluralize(@record.errors.count, "error") %> prohibited
+      this article from being saved:
+    </h2>
+    <ul>
+      <% @record.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div class="panel panel-blue">
   <div class="panel-body">
     <%= form_for :record, html: {class: "form-inline"} do |f| %>

@@ -1,5 +1,20 @@
+<% if defined? @item and @item.errors.any? %>
+  <div class="error">
+    <h2>
+      <%= pluralize(@item.errors.count, "error") %> prohibited
+      this article from being saved:
+    </h2>
+    <ul>
+      <% @item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div class="panel panel-blue">
   <div class="panel-body">
+
     <%= form_for :item, html: {class: "form-inline"} do |f| %>
       <div class="form-group">
         <%= f.text_field :name, type: "text", class: "form-control", placeholder: "Наименование" %>
