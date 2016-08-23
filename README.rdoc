@@ -1,3 +1,5 @@
+{<img src="https://codeclimate.com/github/RomanKrasavtsev/Mountt/badges/gpa.svg" />}[https://codeclimate.com/github/RomanKrasavtsev/Mountt]
+
 # Mountt
 
 Учет семейного бюджета.
