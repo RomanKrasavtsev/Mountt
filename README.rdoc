@@ -1,11 +1,11 @@
 {<img src="https://codeclimate.com/github/RomanKrasavtsev/Mountt/badges/gpa.svg" />}[https://codeclimate.com/github/RomanKrasavtsev/Mountt]
 {<img src="https://travis-ci.org/RomanKrasavtsev/Mountt.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/RomanKrasavtsev/Mountt]
 
-# Mountt
+= Mountt
 
 Учет семейного бюджета.
 
-## Todo
+== Todo
 * Добавление члена семьи
 * Аналитика по записям
 * Отдельный слой для лендинга, регистрации, авторизации
@@ -13,5 +13,5 @@
 * Добавить таблицу Роли
 * Панель администратора (количество пользователей, активных пользователей, количество входов в день/неделю/месяц)
 
-## License
+== License
 © 2016 Roman Krasavtsev
