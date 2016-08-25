@@ -30,7 +30,10 @@
       <div class="form-group">
         <%= f.select :user_id, current_user.family.user.map { |user| [user.firstname, user.id] }, {}, { class: "form-control", placeholder: "Член семьи" } %>
       </div>
-      <%= f.submit "Добавить", class: "btn btn-success" %>
+      <%= button_tag class: "btn btn-success" do %>
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Добавить
+      <% end %>
     <% end %>
   </div>
 </div>
@@ -61,13 +64,16 @@
             <td><%= record.value %> ₽</td>
             <td><%= record.user.firstname %></td>
             <td>
-              <a id="edit" class="btn btn-warning">Редактировать</a>
-              <%= link_to "Удалить",
-                record_path(record),
-                method: :delete,
+              <a id="edit" class="btn btn-warning">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                Редактировать
+              </a>
+              <%= link_to record_path(record), method: :delete,
                 data: { confirm: "Вы уверены, что хотите удалить данную запись?" },
-                class: "btn btn-danger"
-              %>
+                class: "btn btn-danger" do %>
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                Удалить
+              <% end %>
             </td>
           </tr>
         <% end %>

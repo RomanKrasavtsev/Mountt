@@ -23,7 +23,12 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Помощь</a></li>
+            <li>
+              <a href="#">
+                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                Помощь
+              </a>
+            </li>
             <li class="dropdown">
               <% if user_signed_in? %>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -31,15 +36,31 @@
                    <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Настройки</a></li>
-                  <li><a href="#">Платежи</a></li>
+                  <li>
+                    <a href="#">
+                      <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                      Настройки
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <span class="glyphicon glyphicon-ruble" aria-hidden="true"></span>
+                      Платежи
+                    </a>
+                  </li>
                   <li role="separator" class="divider"></li>
                   <li>
-                    <%= link_to "Выход", destroy_user_session_path, :method => :delete %>
+                    <%= link_to destroy_user_session_path, :method => :delete do %>
+                      <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                      Выход
+                    <% end %>
                   </li>
                 </ul>
               <% else %>
-                <%= link_to "Войти", new_user_session_path %>
+                <%= link_to new_user_session_path do %>
+                  <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                  Войти
+                <% end %>
               <% end %>
             </li>
           </ul>
@@ -51,16 +72,35 @@
         <div class="panel-body">
           <ul>
             <li>
-              <a href="">Аналитика</a>
+              <a href="">
+                <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+                Аналитика
+              </a>
             </li>
             <li>
-              <%= link_to "Учет", records_path %>
+              <%= link_to records_path do %>
+                <span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>
+                Учет
+              <% end %>
             </li>
-            <li><a href="">План</a></li>
             <li>
-              <%= link_to "Категории", items_path %>
+              <a href="">
+                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                План
+              </a>
             </li>
-            <li><a href="#">Моя семья</a></li>
+            <li>
+              <%= link_to items_path do %>
+                <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
+                Категории
+              <% end %>
+            </li>
+            <li>
+              <a href="#">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                Моя семья
+              </a>
+            </li>
           </ul>
         </div>
       </div>
