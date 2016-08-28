@@ -1,0 +1,66 @@
+<% if defined? @plan and @plan.errors.any? %>
+  <div class="error">
+    <h2>
+      <%= pluralize(@plan.errors.count, "error") %> prohibited
+      this article from being saved:
+    </h2>
+    <ul>
+      <% @plan.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="panel panel-blue">
+  <div class="panel-body">
+
+    <%= form_for :plan, html: {class: "form-inline"} do |f| %>
+      <div class="form-group">
+        <%= f.select :item_id, current_user.family.item.map { |item| [item.name, item.id] }, {}, { class: "form-control", placeholder: "Категория" } %>
+        <%= f.text_field :value, type: "text", class: "form-control", placeholder: "Сумма" %>
+      </div>
+      <%= f.submit "Добавить", class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">План</div>
+  <div class="panel-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Категория</th>
+          <th>Сумма</th>
+          <th>Действия</th>
+        </tr>
+      </thead>
+
+      <% if @plans.present? %>
+        <% @plans.each_with_index do |plan, index| %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= plan.item.name %></td>
+            <td><%= plan.value %></td>
+            <td>
+              <a id="edit" class="btn btn-warning">Редактировать</a>
+              <%= link_to "Удалить",
+                plan_path(plan),
+                method: :delete,
+                data: { confirm: "Вы уверены, что хотите удалить данную запись?" },
+                class: "btn btn-danger"
+              %>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td>Нет записей</td>
+        </tr>
+      <% end %>
+
+    </table>
+  </div>
+</div>
