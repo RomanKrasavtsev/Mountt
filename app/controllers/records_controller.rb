@@ -17,9 +17,12 @@ class RecordsController < ApplicationController
 
   def destroy
     @record = current_user.family.record.find(params[:id])
-    @record.destroy
 
-    redirect_to records_path
+    if @record.destroy
+      redirect_to records_path
+    else
+      render "index"
+    end
   end
 
   private

@@ -17,9 +17,12 @@ class ItemsController < ApplicationController
 
   def destroy
     @item = current_user.family.item.find(params[:id])
-    @item.destroy
 
-    redirect_to items_path
+    if @item.destroy
+      redirect_to items_path
+    else
+      render "index"
+    end
   end
 
   private

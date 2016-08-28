@@ -73,10 +73,10 @@
         <div class="panel-body">
           <ul>
             <li>
-              <a href="">
+              <%= link_to dashboard_path do %>
                 <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
                 Аналитика
-              </a>
+              <% end %>
             </li>
             <li>
               <%= link_to records_path do %>
@@ -85,10 +85,10 @@
               <% end %>
             </li>
             <li>
-              <a href="">
+              <%= link_to plans_path do %>
                 <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
                 План
-              </a>
+              <% end %>
             </li>
             <li>
               <%= link_to items_path do %>
@@ -97,10 +97,10 @@
               <% end %>
             </li>
             <li>
-              <a href="#">
+              <%= link_to users_path do %>
                 <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                Моя семья
-              </a>
+                Cемья
+              <% end %>
             </li>
           </ul>
         </div>
