@@ -1,7 +1,9 @@
 <a href="https://codeclimate.com/github/RomanKrasavtsev/Mountt">
   <img src="https://codeclimate.com/github/RomanKrasavtsev/Mountt/badges/gpa.svg" />
 </a>
-{<img src="https://travis-ci.org/RomanKrasavtsev/Mountt.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/RomanKrasavtsev/Mountt]
+<a href="https://travis-ci.org/RomanKrasavtsev/Mountt">
+  <img src="https://travis-ci.org/RomanKrasavtsev/Mountt.svg?branch=master" alt="Build Status" />
+</a>
 
 # Mountt
 
