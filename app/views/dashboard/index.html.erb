@@ -2,11 +2,11 @@
   $(function() {
     // var dataset = <%= @dataset.to_json.html_safe %>;
     var dataset = [
-      {name:"Продукты", value: 999},
-      {name: "Рестораны", value: 490},
-      {name: "Обед", value: 777},
-      {name: "Проезд", value: 100},
-      {name: "Здоровье", value: 50}
+      {name: "Продукты", value: 999, color: "green"},
+      {name: "Рестораны", value: 490, color: "blue"},
+      {name: "Обед", value: 777, color: "yellow"},
+      {name: "Проезд", value: 100, color: "purple"},
+      {name: "Здоровье", value: 50, color: "orange"}
     ];
 
     var h = 300;
@@ -34,7 +34,9 @@
       .data(dataset)
       .enter()
       .append("rect")
-      .attr("fill", "red")
+      .attr("fill", function(d) {
+        return d.color;
+      })
       .attr("x", padding)
       .attr("y", function(d, i) {
         if (dataset.length > 5) {
