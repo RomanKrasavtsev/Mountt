@@ -1,0 +1,84 @@
+<script>
+  $(function() {
+    // var dataset = <%= @dataset.to_json.html_safe %>;
+    var dataset = [
+      {name:"Продукты", value: 999},
+      {name: "Рестораны", value: 490},
+      {name: "Обед", value: 777},
+      {name: "Проезд", value: 100},
+      {name: "Здоровье", value: 50}
+    ];
+
+    var h = 300;
+    var w = 500;
+    var padding = 20;
+
+    var svg = d3.select(".dashboard").append("svg")
+      .attr("height", h)
+      .attr("width", w);
+
+    var xScale = d3.scaleLinear()
+      .domain([0, d3.max(dataset, function(d) {
+        return d.value;
+      })])
+      .range([padding, w - padding]);
+    var yScale = d3.scaleLinear()
+      .domain([0, dataset.length])
+      .range([0, h]);
+
+    var xAxis = d3.axisBottom()
+      .scale(xScale)
+      .ticks(7);
+
+    svg.selectAll("rect")
+      .data(dataset)
+      .enter()
+      .append("rect")
+      .attr("fill", "red")
+      .attr("x", padding)
+      .attr("y", function(d, i) {
+        if (dataset.length > 5) {
+          return yScale(i);
+        }
+        else {
+          return i * 20;
+        }
+      })
+      .attr("width", function(d) {
+        return xScale(d.value) - padding;
+      })
+      .attr("height", function(d) {
+        if (dataset.length > 5){
+          return yScale(1) - 1;
+        }
+        else {
+          return 19;
+        }
+      });
+
+    svg.selectAll("text")
+      .data(dataset)
+      .enter()
+      .append("text")
+      .attr("x", padding + 2)
+      .attr("y", 14)
+      .attr("dy", function(d, i) {
+        if (dataset.length > 5) {
+          return yScale(i);
+        }
+        else {
+          return i * 20;
+        }
+      })
+      .text(function(d) {
+        return d.name;
+      });
+
+    svg.append("g")
+      .attr("transform", "translate(0, " + (h - padding) + ")")
+      .call(xAxis);
+  });
+</script>
+
+<div class="dashboard">
+</div>

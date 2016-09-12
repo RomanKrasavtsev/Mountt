@@ -8,7 +8,5 @@ class User < ApplicationRecord
   belongs_to :family
   has_many :record
 
-  default_scope { order :firstname }
-
   validates :firstname, presence: true
 end
