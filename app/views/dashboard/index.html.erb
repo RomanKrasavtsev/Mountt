@@ -105,6 +105,12 @@
         return (h / 2) - (i * 20);
       })
       .attr("height", 19)
+      .attr("width", 0)
+      .transition()
+      .duration(500)
+      .delay(function(d, i) {
+        return i * 200;
+      })
       .attr("width", function(d) {
         return usersXScale(d.amount) - padding;
       });
