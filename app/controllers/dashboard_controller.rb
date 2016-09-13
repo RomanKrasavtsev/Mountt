@@ -8,6 +8,7 @@ class DashboardController < ApplicationController
       .select("records.name", "items.value")
       .joins(:item)
       .group("items.name")
+      .order("sum_records_value DESC")
       .sum("records.value")
     @records = records.map { |k, v| { name: k , value: v } }
 
@@ -17,6 +18,7 @@ class DashboardController < ApplicationController
       .select("users.firstname", "items.value")
       .joins(:item)
       .group("users.firstname")
+      .order("sum_records_value DESC")
       .sum("records.value")
     @users = users.map { |k, v| { user: k, amount: v } }
   end
