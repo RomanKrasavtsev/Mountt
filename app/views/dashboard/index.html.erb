@@ -1,13 +1,13 @@
 <script>
   $(function() {
-    // var dataset = <%= @dataset.to_json.html_safe %>;
-    var dataset = [
-      {name: "Продукты", value: 999, color: "green"},
-      {name: "Рестораны", value: 490, color: "blue"},
-      {name: "Обед", value: 777, color: "yellow"},
-      {name: "Проезд", value: 100, color: "purple"},
-      {name: "Здоровье", value: 50, color: "orange"}
-    ];
+    var dataset = <%= @dataset.to_json.html_safe %>;
+    // var dataset = [
+    //   {name: "Продукты", value: 999, color: "green"},
+    //   {name: "Рестораны", value: 490, color: "blue"},
+    //   {name: "Обед", value: 777, color: "yellow"},
+    //   {name: "Проезд", value: 100, color: "purple"},
+    //   {name: "Здоровье", value: 50, color: "orange"}
+    // ];
 
     var h = 300;
     var w = 500;
@@ -34,9 +34,7 @@
       .data(dataset)
       .enter()
       .append("rect")
-      .attr("fill", function(d) {
-        return d.color;
-      })
+      .attr("fill", "#337ab7")
       .attr("x", padding)
       .attr("y", function(d, i) {
         if (dataset.length > 5) {
@@ -72,12 +70,14 @@
           return i * 20;
         }
       })
+      .attr("fill", "white")
       .text(function(d) {
         return d.name;
       });
 
     svg.append("g")
       .attr("transform", "translate(0, " + (h - padding) + ")")
+      .attr("fill", "red")
       .call(xAxis);
   });
 </script>
