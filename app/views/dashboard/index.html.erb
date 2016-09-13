@@ -1,13 +1,6 @@
 <script>
   $(function() {
     var dataset = <%= @dataset.to_json.html_safe %>;
-    // var dataset = [
-    //   {name: "Продукты", value: 999, color: "green"},
-    //   {name: "Рестораны", value: 490, color: "blue"},
-    //   {name: "Обед", value: 777, color: "yellow"},
-    //   {name: "Проезд", value: 100, color: "purple"},
-    //   {name: "Здоровье", value: 50, color: "orange"}
-    // ];
 
     var h = 300;
     var w = 500;
@@ -44,16 +37,22 @@
           return (h / 2) - (i * 20);
         }
       })
-      .attr("width", function(d) {
-        return xScale(d.value) - padding;
-      })
+      .attr("width", 0)
       .attr("height", function(d) {
-        if (dataset.length > 5){
+        if (dataset.length > 5) {
           return yScale(1) - 1;
         }
         else {
           return 19;
         }
+      })
+      .transition()
+      .duration(500)
+      .delay(function(d, i) {
+        return i * 200;
+      })
+      .attr("width", function(d) {
+        return xScale(d.value) - padding;
       });
 
     svg.selectAll("text")
@@ -77,7 +76,6 @@
 
     svg.append("g")
       .attr("transform", "translate(0, " + (h - padding) + ")")
-      .attr("fill", "red")
       .call(xAxis);
   });
 </script>
