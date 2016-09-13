@@ -38,10 +38,10 @@
       .attr("x", padding)
       .attr("y", function(d, i) {
         if (dataset.length > 5) {
-          return yScale(i);
+          return (h / 2) - yScale(i);
         }
         else {
-          return i * 20;
+          return (h / 2) - (i * 20);
         }
       })
       .attr("width", function(d) {
@@ -64,10 +64,10 @@
       .attr("y", 14)
       .attr("dy", function(d, i) {
         if (dataset.length > 5) {
-          return yScale(i);
+          return (h / 2) - yScale(i);
         }
         else {
-          return i * 20;
+          return (h / 2) - (i * 20);
         }
       })
       .attr("fill", "white")
