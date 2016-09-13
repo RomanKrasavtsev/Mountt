@@ -1,4 +1,16 @@
 <script>
+  function getColor(i) {
+    var colors = [
+      "#337ab7",
+      "#5cb85c",
+      "#f0ad4e",
+      "#ac2925",
+      "#5bc0de"
+    ];
+
+    return colors[ i % colors.length ];
+  }
+
   $(function() {
     var records = <%= @records.to_json.html_safe %>;
     var users = <%= @users.to_json.html_safe %>;
@@ -29,7 +41,9 @@
       .data(records)
       .enter()
       .append("rect")
-      .attr("fill", "#337ab7")
+      .attr("fill", function(d, i) {
+        return getColor(i);
+      })
       .attr("x", padding)
       .attr("y", function(d, i) {
         if (records.length > 5) {
@@ -99,7 +113,9 @@
       .data(users)
       .enter()
       .append("rect")
-      .attr("fill", "#337ab7")
+      .attr("fill", function(d, i) {
+        return getColor(i);
+      })
       .attr("x", padding)
       .attr("y", function(d, i) {
         return (h / 2) - (i * 20);
