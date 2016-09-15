@@ -1,8 +1,11 @@
+<a href="https://travis-ci.org/RomanKrasavtsev/Mountt">
+  <img src="https://travis-ci.org/RomanKrasavtsev/Mountt.svg?branch=master" alt="Build Status" />
+</a>
 <a href="https://codeclimate.com/github/RomanKrasavtsev/Mountt">
   <img src="https://codeclimate.com/github/RomanKrasavtsev/Mountt/badges/gpa.svg" />
 </a>
-<a href="https://travis-ci.org/RomanKrasavtsev/Mountt">
-  <img src="https://travis-ci.org/RomanKrasavtsev/Mountt.svg?branch=master" alt="Build Status" />
+<a href='https://gemnasium.com/github.com/RomanKrasavtsev/Mountt'>
+  <img src="https://gemnasium.com/badges/github.com/RomanKrasavtsev/Mountt.svg" alt="Dependency Status" />
 </a>
 
 # Mountt
