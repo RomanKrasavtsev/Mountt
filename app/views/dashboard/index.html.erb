@@ -1,10 +1,10 @@
 <script>
   function getColor(i) {
     var colors = [
-      "#337ab7",
-      "#5cb85c",
+      "purple",
+      "green",
       "#f0ad4e",
-      "#ac2925",
+      "red",
       "#5bc0de"
     ];
 
@@ -20,7 +20,11 @@
     var padding = 20;
 
     // Records
-    var svg = d3.select(".dashboard").append("svg")
+    var svg = d3.select(".dashboard").append("div")
+      .classed("panel panel-blue col-md-5", true)
+      .append("div")
+      .classed("panel-body", true)
+      .append("svg")
       .attr("height", h)
       .attr("width", w);
 
@@ -95,7 +99,11 @@
       .call(xAxis);
 
     //Users
-    var usersSvg = d3.select(".dashboard").append("svg")
+    var usersSvg = d3.select(".dashboard").append("div")
+      .classed("panel panel-blue col-md-5", true)
+      .append("div")
+      .classed("panel-body", true)
+      .append("svg")
       .attr("height", h)
       .attr("width", w);
 
@@ -153,10 +161,10 @@
 
 <style>
   .domain, .tick line {
-    stroke: #337ab7;
+    stroke: white;
   }
   .tick text {
-    fill: #337ab7;
+    fill: white;
   }
 </style>
 
