@@ -68,59 +68,59 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-    <row>
-      <div class="panel panel-blue col-md-2">
-        <div class="panel-body">
-          <ul>
-            <li>
-              <%= link_to dashboard_path do %>
-                <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
-                Аналитика
-              <% end %>
-            </li>
-            <li>
-              <%= link_to records_path do %>
-                <span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>
-                Учет
-              <% end %>
-            </li>
-            <li>
-              <%= link_to plans_path do %>
-                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
-                План
-              <% end %>
-            </li>
-            <li>
-              <%= link_to items_path do %>
-                <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
-                Категории
-              <% end %>
-            </li>
-            <li>
-              <%= link_to users_path do %>
-                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                Cемья
-              <% end %>
-            </li>
-          </ul>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="menu col-md-2">
+          <div class="panel panel-blue panel-body">
+            <ul>
+              <li>
+                <%= link_to dashboard_path do %>
+                  <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+                  Аналитика
+                <% end %>
+              </li>
+              <li>
+                <%= link_to records_path do %>
+                  <span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>
+                  Учет
+                <% end %>
+              </li>
+              <li>
+                <%= link_to plans_path do %>
+                  <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                  План
+                <% end %>
+              </li>
+              <li>
+                <%= link_to items_path do %>
+                  <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
+                  Категории
+                <% end %>
+              </li>
+              <li>
+                <%= link_to users_path do %>
+                  <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                  Cемья
+                <% end %>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-10">
+          <% if notice %>
+            <div class="notice">
+              <%= notice %>
+            </div>
+          <% end %>
+          <% if alert %>
+            <div class="alert">
+              <%= alert %>
+            </div>
+          <% end %>
+            <%= yield %>
         </div>
       </div>
-
-      <div class="col-md-10">
-        <% if notice %>
-          <div class="notice">
-            <%= notice %>
-          </div>
-        <% end %>
-        <% if alert %>
-          <div class="alert">
-            <%= alert %>
-          </div>
-        <% end %>
-
-        <%= yield %>
-      </div>
-    </row>
-
+    </div>
   </body>
 </html>
