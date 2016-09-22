@@ -7,6 +7,9 @@
 <a href='https://gemnasium.com/github.com/RomanKrasavtsev/Mountt'>
   <img src="https://gemnasium.com/badges/github.com/RomanKrasavtsev/Mountt.svg" alt="Dependency Status" />
 </a>
+<a href='https://coveralls.io/github/RomanKrasavtsev/Mountt?branch=master'>
+  <img src='https://coveralls.io/repos/github/RomanKrasavtsev/Mountt/badge.svg?branch=master' alt='Coverage Status' />
+</a>
 
 # Mountt
 
