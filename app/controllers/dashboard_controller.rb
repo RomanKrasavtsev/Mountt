@@ -20,6 +20,6 @@ class DashboardController < ApplicationController
       .group("users.firstname")
       .order("sum_records_value DESC")
       .sum("records.value")
-    @users = users.map { |k, v| { user: k, amount: v } }
+    @users = users.map { |k, v| { name: k, value: v } }
   end
 end

@@ -11,6 +11,88 @@
     return colors[ i % colors.length ];
   }
 
+  function plot(params) {
+    var h = parseInt(this.style("height"));
+    var w = parseInt(this.style("width"));
+    var padding = 20;
+
+    var xScale = d3.scaleLinear()
+      .domain([0, d3.max(params.data, function(d) {
+        return d.value;
+      })])
+      .range([padding, w - padding]);
+
+    var yScale = d3.scaleLinear()
+      .domain([0, params.data.length])
+      .range([padding, h - padding]);
+
+    var xAxis = d3.axisBottom()
+      .scale(xScale)
+      .ticks(7);
+
+    this.selectAll(".bar")
+      .data(params.data)
+      .enter()
+      .append("rect")
+      .attr("class", "bar")
+      .attr("fill", function(d, i) {
+        return getColor(i);
+      })
+      .attr("x", padding)
+      .attr("y", function(d, i) {
+        return yScale(i);
+      })
+      .attr("width", 0)
+      .attr("height", function(d) {
+        return yScale(0);
+      })
+      .transition()
+      .duration(500)
+      .delay(function(d, i) {
+        return i * 200;
+      })
+      .attr("width", function(d) {
+        return xScale(d.value) - padding;
+      });
+
+    this.selectAll("text")
+      .data(params.data)
+      .enter()
+      .append("text")
+      .attr("x", padding + 2)
+      .attr("y", 14)
+      .attr("dy", function(d, i) {
+        return yScale(i);
+      })
+      .attr("fill", "white")
+      .text(function(d) {
+        return d.name;
+      });
+
+    this.selectAll(".bar-label")
+      .data(params.data)
+      .enter()
+      .append("text")
+      .text(function(d) {
+        return d.value;
+      })
+      .classed("bar-label", true)
+      .attr("x", function(d) {
+        return xScale(d.value) - 5;
+      })
+      .attr("y", function(d, i) {
+        return yScale(i) + 1;
+      })
+      .attr("dx", 3)
+      .attr("dy", function(d) {
+        return yScale(0) / 1.5;
+      });
+
+    this.append("g")
+      .attr("transform", "translate(0, " + (h - padding) + ")")
+      .call(xAxis);
+  }
+
   $(function() {
     var records = <%= @records.to_json.html_safe %>;
     var users = <%= @users.to_json.html_safe %>;
@@ -35,102 +117,9 @@
     .attr("height", "100%")
     .attr("width", "100%");
 
-    var h = parseInt(categoriesSvg.style("height"));
-    var w = parseInt(categoriesSvg.style("width"));
-    var padding = 20;
-
-    var xScale = d3.scaleLinear()
-      .domain([0, d3.max(records, function(d) {
-        return d.value;
-      })])
-      .range([padding, w - padding]);
-      
-    var yScale = d3.scaleLinear()
-      .domain([0, records.length])
-      .range([padding, h - padding]);
-
-    var xAxis = d3.axisBottom()
-      .scale(xScale)
-      .ticks(7);
-
-    categoriesSvg.selectAll(".bar")
-      .data(records)
-      .enter()
-      .append("rect")
-      .attr("class", "bar")
-      .attr("fill", function(d, i) {
-        return getColor(i);
-      })
-      .attr("x", padding)
-      .attr("y", function(d, i) {
-        return yScale(i);
-        // if (records.length > 4) {
-        //   return (i * 20) + padding;
-        // }
-        // else {
-        //   return (h / 2) - yScale(i);
-        // }
-      })
-      .attr("width", 0)
-      .attr("height", function(d) {
-        if (records.length > 4) {
-          return 19;
-        }
-        else {
-          return yScale(1) - 1;
-        }
-      })
-      .transition()
-      .duration(500)
-      .delay(function(d, i) {
-        return i * 200;
-      })
-      .attr("width", function(d) {
-        return xScale(d.value) - padding;
-      });
-
-    categoriesSvg.selectAll("text")
-      .data(records)
-      .enter()
-      .append("text")
-      .attr("x", padding + 2)
-      .attr("y", 14)
-      .attr("dy", function(d, i) {
-        return yScale(i);
-        // if (records.length > 4) {
-        //   return (i * 20) + padding; // (h / 2)
-        // }
-        // else {
-        //   return (h / 2) - yScale(i);
-        // }
-      })
-      .attr("fill", "white")
-      .text(function(d) {
-        return d.name;
-      });
-
-    categoriesSvg.selectAll(".bar-label")
-      .data(records)
-      .enter()
-      .append("text")
-      .text(function(d) {
-        return d.value;
-      })
-      .classed("bar-label", true)
-      .attr("x", function(d) {
-        return xScale(d.value) - 5;
-      })
-      .attr("y", function(d, i) {
-        return yScale(i) + 1;
-      })
-      .attr("dx", 3)
-      .attr("dy", function(d) {
-        return yScale(0) / 1.5;
-      });
-
-    categoriesSvg.append("g")
-      .attr("transform", "translate(0, " + (h - padding) + ")")
-      .call(xAxis);
+    plot.call(categoriesSvg, {
+      data: records
+    });
 
     //Users
     var usersPanel = dashboard.append("div")
@@ -147,86 +136,12 @@
     var usersSvg = usersPanel.append("div")
       .classed("panel-body", true)
       .append("svg")
-      .attr("height", h)
-      .attr("width", w);
+      .attr("height", "100%")
+      .attr("width", "100%");
 
-    var usersXScale = d3.scaleLinear()
-      .domain([0, d3.max(users, function(d) {
-        return d.amount;
-      })])
-      .range([padding, w - padding]);
-
-    var usersYScale = d3.scaleLinear()
-      .domain([0, users.length])
-      .range([padding, h - padding]);
-
-    var usersXAxis = d3.axisBottom()
-      .scale(usersXScale)
-      .ticks(7);
-
-    usersSvg.selectAll(".bar")
-      .data(users)
-      .enter()
-      .append("rect")
-      .attr("class", "bar")
-      .attr("fill", function(d, i) {
-        return getColor(i);
-      })
-      .attr("x", padding)
-      .attr("y", function(d, i) {
-        return usersYScale(i);
-        // (h / 2) - (i * 20);
-      })
-      .attr("height", 19)
-      .attr("width", 0)
-      .transition()
-      .duration(500)
-      .delay(function(d, i) {
-        return i * 200;
-      })
-      .attr("width", function(d) {
-        return usersXScale(d.amount) - padding;
-      });
-
-    usersSvg.selectAll("text")
-      .data(users)
-      .enter()
-      .append("text")
-      .attr("x", padding + 2)
-      .attr("y", function(d, i) {
-        return usersYScale(i);
-      })
-      .attr("dy", function(d, i) {
-        return usersYScale(0) / 1.5;
-        //return (h / 2) - (i * 20);
-      })
-      .attr("fill", "white")
-      .text(function(d) {
-        return d.user;
-      });
-
-    usersSvg.selectAll(".bar-label")
-      .data(users)
-      .enter()
-      .append("text")
-      .classed("bar-label", true)
-      .text(function(d) {
-        return d.amount;
-      })
-      .attr("x", function(d) {
-        return usersXScale(d.amount) - 5;
-      })
-      .attr("y", function(d, i) {
-        return usersYScale(i) + 1;
-      })
-      .attr("dx", 3)
-      .attr("dy", function(d) {
-        return usersYScale(0) / 1.5;
-      });
-
-    usersSvg.append("g")
-      .attr("transform", "translate(0, " + (h - padding) + ")")
-      .call(usersXAxis);
+    plot.call(usersSvg, {
+      data: users
+    });
   });
 </script>
 
