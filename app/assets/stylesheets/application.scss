@@ -80,3 +80,12 @@ body {
   border-bottom: 1px solid white;
   color: white;
 }
+
+.bar {
+  shape-rendering: crispEdges;
+}
+
+.bar-label {
+  fill: white;
+  text-anchor: end;
+}
