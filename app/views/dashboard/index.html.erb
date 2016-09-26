@@ -84,12 +84,10 @@
   }
 
   $(function() {
-    var categories = <%= @categories.to_json.html_safe %>;
-    var users = <%= @users.to_json.html_safe %>;
-
     var dashboard = d3.select(".dashboard")
 
     // Categories
+    var categories = <%= @categories.to_json.html_safe %>;
     var categoriesPanel = dashboard.append("div")
       .classed("row", true)
       .append("div")
@@ -111,7 +109,8 @@
       data: categories
     });
 
-    //Users
+    // Users
+    var users = <%= @users.to_json.html_safe %>;
     var usersPanel = dashboard.append("div")
       .classed("row", true)
       .append("div")
@@ -132,6 +131,10 @@
     plot.call(usersSvg, {
       data: users
     });
+
+    // Costs
+    var costs = <%= @costs.to_json_html_safe %>;
+    
   });
 </script>
 
