@@ -2,15 +2,15 @@ class DashboardController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    # Records
-    records = current_user.family.record
+    # Categories
+    categories = current_user.family.record
       .current_month
       .select("records.name", "items.value")
       .joins(:item)
       .group("items.name")
       .order("sum_records_value DESC")
       .sum("records.value")
-    @records = records.map { |k, v| { name: k , value: v } }
+    @categories = categories.map { |k, v| { name: k , value: v }}
 
     # Users
     users = current_user.family.record
@@ -20,6 +20,15 @@ class DashboardController < ApplicationController
       .group("users.firstname")
       .order("sum_records_value DESC")
       .sum("records.value")
-    @users = users.map { |k, v| { name: k, value: v } }
+    @users = users.map { |k, v| { name: k, value: v }}
+
+    # Costs
+    costs = current_user.family.record
+      .current_month
+      .select(:value, :date)
+      .group(:date)
+      .order("date")
+      .sum("value")
+    @costs = costs.map { |k, v| { date: k, value: v }}
   end
 end
