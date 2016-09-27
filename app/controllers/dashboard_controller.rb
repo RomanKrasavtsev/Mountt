@@ -30,11 +30,16 @@ class DashboardController < ApplicationController
       .order("date")
       .sum("value")
 
-    month = []
+    costs = costs.map { |k, v| { key: k.strftime("%F"), value: v }}
+
     now = Time.now
     Time.days_in_month(now.month, now.year).times do |i|
-      month << "#{now.year}-#{now.month}-#{i}"
+      day = i + 1
+      day = "0" + day.to_s if day < 10
+      date = "#{now.year}-#{now.strftime('%m')}-#{day}"
+      costs << { key: date, value: 0 }
     end
-    @costs = costs.map { |k, v| { key: k, value: v }}
+
+    @costs = costs.uniq { |i| i[:key] }
   end
 end
