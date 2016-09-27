@@ -10,7 +10,7 @@ class DashboardController < ApplicationController
       .group("items.name")
       .order("sum_records_value DESC")
       .sum("records.value")
-    @categories = categories.map { |k, v| { name: k , value: v }}
+    @categories = categories.map { |k, v| { key: k , value: v }}
 
     # Users
     users = current_user.family.record
@@ -20,7 +20,7 @@ class DashboardController < ApplicationController
       .group("users.firstname")
       .order("sum_records_value DESC")
       .sum("records.value")
-    @users = users.map { |k, v| { name: k, value: v }}
+    @users = users.map { |k, v| { key: k, value: v }}
 
     # Costs
     costs = current_user.family.record
@@ -29,6 +29,12 @@ class DashboardController < ApplicationController
       .group(:date)
       .order("date")
       .sum("value")
-    @costs = costs.map { |k, v| { date: k, value: v }}
+
+    month = []
+    now = Time.now
+    Time.days_in_month(now.month, now.year).times do |i|
+      month << "#{now.year}-#{now.month}-#{i}"
+    end
+    @costs = costs.map { |k, v| { key: k, value: v }}
   end
 end
