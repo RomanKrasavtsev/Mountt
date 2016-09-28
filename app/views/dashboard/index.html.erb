@@ -88,15 +88,11 @@
     var w = parseInt(this.style("width"));
 
     var margin = {
-      top: 10,
+      top: 5,
       bottom: 20,
-      left: 100,
+      left: 40,
       right: 10
     };
-
-    var height = h - margin.top - margin.bottom;
-    var width = w - margin.left - margin.top;
-    console.log(height, width);
 
     var dateParser = d3.timeParse("%Y-%m-%d");
 
@@ -104,13 +100,30 @@
       .domain(d3.extent(params.data, function(d) {
         return dateParser(d.key);
       }))
-      .range([2, width]);
+      .range([margin.left, w - margin.right]);
 
     var yScale = d3.scaleLinear()
       .domain([0, d3.max(params.data, function(d) {
         return d.value;
       })])
-      .range([height, 2]);
+      .range([h - margin.bottom, margin.top]);
+
+    var xAxis = d3.axisBottom()
+      .scale(xScale);
+
+    var yAxis = d3.axisLeft()
+      .scale(yScale)
+      .ticks(5);
+
+    this.append("g")
+      .classed("x axis", true)
+      .attr("transform", "translate(0, " + (h - margin.bottom) + ")")
+      .call(xAxis);
+
+    this.append("g")
+      .classed("y axis", true)
+      .attr("transform", "translate(" + margin.left + ", 0)")
+      .call(yAxis);
 
     // enter()
     this.selectAll(".point")
@@ -135,12 +148,6 @@
       .data(params.data)
       .exit()
       .remove();
-    // var xAxis = d3.axisBottom()
-    //   .scale(xScale)
-    //   .ticks(7);
-    //
-    // var yAxis = d3.axisLeft()
-    //   .scale(yScale);
 
     // var chart = this.append("g")
     //   .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
@@ -198,6 +205,30 @@
   $(function() {
     var dashboard = d3.select(".dashboard")
 
+    // Costs
+    var costs = <%= @costs.to_json.html_safe %>;
+
+    var costsPanel = dashboard.append("div")
+      .classed("row", true)
+      .append("div")
+      .classed("col-md-12", true)
+      .append("div")
+      .classed("panel panel-blue", true);
+
+    costsPanel.append("div")
+      .classed("panel-heading", true)
+      .text("Расходы");
+
+    var costsSvg = costsPanel.append("div")
+      .classed("panel-body", true)
+      .append("svg")
+      .attr("height", "100%")
+      .attr("width", "100%");
+
+    lineChart.call(costsSvg, {
+      data: costs
+    });
+
     // Categories
     var categories = <%= @categories.to_json.html_safe %>;
     var categoriesPanel = dashboard.append("div")
@@ -243,31 +274,6 @@
     columnChart.call(usersSvg, {
       data: users
     });
-
-    // Costs
-    var costs = <%= @costs.to_json.html_safe %>;
-    console.log(costs);
-
-    var costsPanel = dashboard.append("div")
-      .classed("row", true)
-      .append("div")
-      .classed("col-md-12", true)
-      .append("div")
-      .classed("panel panel-blue", true);
-
-    costsPanel.append("div")
-      .classed("panel-heading", true)
-      .text("Расходы");
-
-    var costsSvg = costsPanel.append("div")
-      .classed("panel-body", true)
-      .append("svg")
-      .attr("height", "100%")
-      .attr("width", "100%");
-
-    lineChart.call(costsSvg, {
-      data: costs
-    })
   });
 </script>
 
