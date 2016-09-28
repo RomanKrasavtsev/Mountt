@@ -40,6 +40,6 @@ class DashboardController < ApplicationController
       costs << { key: date, value: 0 }
     end
 
-    @costs = costs.uniq { |i| i[:key] }
+    @costs = costs.uniq { |i| i[:key] }.sort_by { |i| i[:key] }
   end
 end
